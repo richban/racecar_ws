@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Open the racecar model file -->
+  <arg name="racecar_xacro" default="$(find mit_racecar)/racecar.xacro" />
+  <param name="robot_description" command="xacro --inorder '$(arg racecar_xacro)'" />
+
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="False"/>
+  </node>
+
+  <!-- Add the transformations -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+</launch>

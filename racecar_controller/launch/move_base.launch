@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+  <!-- Launch a map from the maps folder-->
+  <arg name="map" default="$(find mit_racecar)/maps/apartment.yaml" />
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" respawn="true" output="screen" />
+
+  <!-- Place map frame at odometry frame -->
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/>
+
+  <!-- Localization -->
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <param name="odom_frame_id" value="odom"/>
+    <param name="odom_model_type" value="diff"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="update_min_d" value="0.5"/>
+    <param name="update_min_a" value="1.0"/>
+  </node>
+
+  <!-- Launch the racecar model -->
+  <include file="$(find mit_racecar)/launch/racecar_model.launch"/>
+  
+  <!-- Launch rviz -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mit_racecar)/rviz/localization.rviz" />
+
+  <!-- Move base -->
+  <!-- <arg name="base_global_planner" default="navfn/NavfnROS" /> -->
+  <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam name="base_global_planner" value="$(arg base_global_planner)" />
+    <rosparam name="base_local_planner" value="$(arg base_local_planner)" />
+    <!-- costmap common params -->
+    <rosparam file="$(find mit_racecar)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <!-- local costmap -->
+    <rosparam file="$(find mit_racecar)/config/local_costmap_params.yaml" command="load" />
+    <!-- global costmap -->
+    <rosparam file="$(find mit_racecar)/config/global_costmap_params.yaml" command="load" />
+    <!-- common params -->
+    <rosparam file="$(find mit_racecar)/config/base_local_planner_params.yaml" command="load" />
+    
+    <param name="move_base/DWAPlannerROS/yaw_goal_tolerance" value="1.0"/>
+    <param name="move_base/DWAPlannerROS/xy_goal_tolerance" value="1.0"/>
+  </node>
+
+</launch>

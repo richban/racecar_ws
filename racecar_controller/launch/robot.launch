@@ -1,0 +1,6 @@
+<launch>
+  <!-- Launch the bug wall follower with parameters -->
+  <node pkg="robot" name="Robot Controller" type="robot.py" output="screen">
+  <node pkg="safety" name="Fail Safe Controller" type="safety.py" output="screen">
+  </node>
+</launch>

@@ -1,0 +1,15 @@
+<launch>
+  <!-- Launch a map from the maps folder-->
+  <arg name="map" default="$(find mit_racecar)/maps/map3rdfloor.yaml" />
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" respawn="true" output="screen" />
+
+  <!-- Place map frame at odometry frame -->
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/>
+
+  <!-- Launch the racecar model -->
+  <include file="$(find mit_racecar)/launch/racecar_model.launch"/>
+  
+  <!-- Launch rviz -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mit_racecar)/rviz/localization.rviz" />
+</launch>
