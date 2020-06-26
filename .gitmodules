@@ -1,3 +1,6 @@
 [submodule "racecar_simulator"]
 	path = racecar_simulator
 	url = https://github.com/mit-racecar/racecar_simulator.git
+[submodule "racecar_gazebo"]
+	path = racecar_gazebo
+	url = https://github.com/mit-racecar/racecar_gazebo.git
