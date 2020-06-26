@@ -1,0 +1,3 @@
+[submodule "racecar_simulator"]
+	path = racecar_simulator
+	url = https://github.com/mit-racecar/racecar_simulator.git
