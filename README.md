@@ -13,7 +13,7 @@ docker build -t racecar/platform .
 Run the image with volume mounted of this repository and connect to VNC with your browser https://localhost:6080/
 
 ```
-docker run -v "`pwd`:/home/ubuntu/racecar_ws/src/" -it --rm -p 6080:80 racecar/platform
+docker run -v "`pwd`/racecar_ws:/home/ubuntu/racecar_ws/src/" -it --rm -p 6080:80 racecar/platform
 ```
 
 After the image is mounted ssh into the container and build the catkin worspaces
