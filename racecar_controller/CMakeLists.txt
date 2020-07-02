@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(mit_racecar)
+project(racecar_nav)
 
 find_package(catkin REQUIRED COMPONENTS
   ackermann_msgs

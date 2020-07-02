@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>mit_racecar</name>
+  <name>racecar_nav</name>
   <version>1.0.0</version>
-  <description>Intro to MIT Racecar</description>
+  <description>Racecar Navigation</description>
   <maintainer email="rbanyi@me.com">rbanyi@me.com</maintainer>
 
   <license>MIT</license>
