@@ -1,15 +1,13 @@
 <?xml version="1.0"?>
 <launch>
-  <!-- Open the racecar model file -->
-  <arg name="racecar_xacro" default="$(find mit_racecar)/racecar.xacro" />
-  <param name="robot_description" command="xacro --inorder '$(arg racecar_xacro)'" />
+
+  <!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
 
   <!-- send fake joint values -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="False"/>
-  </node>
+  <node name="joint_state_publisher" pgk="joint_state_publisher" type="joint_state_publusher"/>
 
-  <!-- Add the transformations -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
 
 </launch>

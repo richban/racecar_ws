@@ -2,9 +2,12 @@
 # footprint: [[-0.1, -0.15], [0.425, -0.15], [0.425, 0.15], [-0.1, 0.15]]
 
 # Specifies the delay in transform (tf) data that is tolerable in seconds.
-transform_tolerance: 0.2
+transform_tolerance: 0.5
 
-map_type: costmap
+map_type: voxel
+
+planner_frequency: 1.0
+planner_patience: 5.0
 
 # The global frame for the costmap to operate in
 global_frame: map
@@ -37,7 +40,8 @@ inflation_layer:
   # exponential rate at which the obstacle cost drops off (default: 10)
   cost_scaling_factor: 10.0 
   # max. distance from an obstacle at which costs are incurred for planning paths.
-  inflation_radius: 0.15 
+  inflation_radius: 0.15
+
 
 # The static map layer represents a largely unchanging portion of the costmap
 static_layer:

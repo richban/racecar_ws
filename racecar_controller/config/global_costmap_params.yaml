@@ -1,15 +1,15 @@
 global_costmap:
   # The frequency in Hz for the map to be updated.
-  update_frequency: 2.0
+  update_frequency: 1.0
   # The frequency in Hz for the map to be publish display information.
-  publish_frequency: 0.0
+  publish_frequency: 0.5
   # If you aren't using an existing map or map server, set the static_map parameter to false.:w
-  static_map: false 
-  robot_radius: 0.4
+  static_map: true
+  robot_radius: 0.3
   footprint_padding: 0.2
-  width: 102.4
-  height: 102.4
-  origin_x: -51.224
-  origin_y: -51.224
-  resolution: 0.05
+  # width: 102.4
+  # height: 102.4
+  # origin_x: -51.224
+  # origin_y: -51.224
+  # resolution: 0.05
 
