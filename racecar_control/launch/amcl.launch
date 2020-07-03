@@ -3,24 +3,19 @@
   <master auto="start"/>
 
   <!-- Launch a map from the maps folder-->
-  <arg name="map" default="$(find mit_racecar)/maps/apartment.yaml" />
-  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" respawn="true" output="screen" />
+  <arg name="map_file" default="$(find racecar_control)/maps/apartment.yaml" />
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
 
   <!-- Place map frame at odometry frame -->
   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
       args="0 0 0 0 0 0 map odom 100"/>
 
-  <!-- Localization -->
-  <node pkg="amcl" type="amcl" name="amcl" output="screen">
-    <param name="odom_frame_id" value="odom"/>
-    <param name="odom_model_type" value="diff"/>
-    <param name="base_frame_id" value="base_link"/>
-    <param name="update_min_d" value="0.5"/>
-    <param name="update_min_a" value="1.0"/>
-  </node>
+  <!-- AMCL Localization -->
+  <arg name="custom_amcl_launch_file" default="$(find racecar_control)/launch/includes/amcl.launch.xml"/>
+  <include file="$(arg custom_amcl_launch_file)"/>
 
   <!-- Launch the racecar model -->
-  <include file="$(find mit_racecar)/launch/racecar_model.launch"/>
+  <include file="$(find racecar_control)/launch/racecar_model.launch"/>
   
   <!-- Launch rviz -->
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mit_racecar)/rviz/localization.rviz" />

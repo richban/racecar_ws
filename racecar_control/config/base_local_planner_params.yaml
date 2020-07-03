@@ -1,11 +1,7 @@
-controlller_frequency: 5.0
-controller_patience: 3.0
-
 TebLocalPlannerROS:
   odom_topic: odom
   map_frame: /odom
   # Trajectory
-
   teb_autosize: True
   dt_ref: 0.3
   dt_hysteresis: 0.1
@@ -37,13 +33,11 @@ TebLocalPlannerROS:
     vertices: [[-0.1, -0.15], [0.425, -0.15], [0.425, 0.15], [-0.1, 0.15]] # for type "polygon"
 
   # GoalTolerance
-
   xy_goal_tolerance: 0.2
   yaw_goal_tolerance: 0.1
   free_goal_vel: False
 
   # Obstacles
-
   min_obstacle_dist: 0.2 # This value must also include our robot's expansion, since footprint_model is set to "line".
   include_costmap_obstacles: True
   costmap_obstacles_behind_robot_dist: 1.0
@@ -53,7 +47,6 @@ TebLocalPlannerROS:
   costmap_converter_rate: 5
 
   # Optimization
-
   no_inner_iterations: 5
   no_outer_iterations: 4
   optimization_activate: True
@@ -71,7 +64,6 @@ TebLocalPlannerROS:
   weight_dynamic_obstacle: 10 # not in use yet
 
   # Homotopy Class Planner
-
   enable_homotopy_class_planning: True
   enable_multithreading: True
   simple_exploration: False

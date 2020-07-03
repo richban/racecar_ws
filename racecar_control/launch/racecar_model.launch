@@ -2,10 +2,12 @@
 <launch>
 
   <!-- urdf xml robot description loaded on the Parameter Server, converting the xacro into a proper urdf file-->
-  <param name="robot_description" command="$(find xacro)/xacro '$(find racecar_description)/urdf/racecar.xacro'" />
+  <param name="racecar_description" command="xacro --inorder '$(find racecar_description)/urdf/racecar.xacro'" />
 
   <!-- send fake joint values -->
-  <node name="joint_state_publisher" pgk="joint_state_publisher" type="joint_state_publusher"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="use_gui" value="False"/>
+  </node>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
