@@ -3,7 +3,7 @@
   <master auto="start"/>
 
   <!-- Launch a map from the maps folder-->
-  <arg name="map" default="$(find racecar_nav)/maps/apartment.yaml" />
+  <arg name="map" default="$(find racecar_control)/maps/apartment.yaml" />
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map)" respawn="true" output="screen" />
 
   <!-- Place map frame at odometry frame -->
@@ -20,10 +20,10 @@
   </node>
 
   <!-- Launch the racecar model -->
-  <include file="$(find racecar_nav)/launch/racecar_model.launch"/>
+  <include file="$(find racecar_control)/launch/racecar_model.launch"/>
   
   <!-- Launch rviz -->
-  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_nav)/rviz/localization.rviz" />
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/localization.rviz" />
 
   <!-- Move base -->
   <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
@@ -32,13 +32,13 @@
     <rosparam name="base_global_planner" value="$(arg base_global_planner)" />
     <rosparam name="base_local_planner" value="$(arg base_local_planner)" />
     <!-- costmap common params -->
-    <rosparam file="$(find racecar_nav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find racecar_control)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <!-- local costmap -->
-    <rosparam file="$(find racecar_nav)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find racecar_control)/config/local_costmap_params.yaml" command="load" />
     <!-- global costmap -->
-    <rosparam file="$(find racecar_nav)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find racecar_control)/config/global_costmap_params.yaml" command="load" />
     <!-- common params -->
-    <rosparam file="$(find racecar_nav)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find racecar_control)/config/base_local_planner_params.yaml" command="load" />
     
     <param name="move_base/DWAPlannerROS/yaw_goal_tolerance" value="1.0"/>
     <param name="move_base/DWAPlannerROS/xy_goal_tolerance" value="1.0"/>
