@@ -1,0 +1,13 @@
+<?xml version='1.0'?>
+
+<launch>
+
+   <node pkg="racecar_control" type="keyboard_teleop.py" name="keyboard_teleop">
+    <remap from="/ackermann_cmd_mux/input/teleop" to="/racecar/ackermann_cmd_mux/output"/>
+  </node>
+
+  <include file="$(find racecar_gazebo)/launch/racecar_tunnel.launch"/>
+
+  <include file="$(find racecar_control)/launch/teleop.launch"/>
+
+</launch>
