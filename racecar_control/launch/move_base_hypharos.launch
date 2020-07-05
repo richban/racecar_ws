@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+  <!-- Launch a map from the maps folder-->
+  <arg name="map_file" default="$(find racecar_control)/maps/apartment.yaml" />
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
+
+  <!-- Place map frame at odometry frame -->
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 map odom 100"/>
+
+  <!-- AMCL Localization -->
+  <include file="$(find racecar_control)/launch/includes/hypharos_amcl.launch.xml"/>
+      
+  <!-- Launch the racecar model -->
+  <include file="$(find racecar_control)/launch/racecar_model.launch"/>
+  
+  <!-- Launch rviz -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/localization.rviz" />
+
+  <!-- Move base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base">
+        <!-- local planner -->
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>  
+        <rosparam file="$(find racecar_control)/config/hypharos/dwa_local_planner_params.yaml" command="load"/>
+        <!-- costmap layers -->    
+        <rosparam file="$(find racecar_control)/config/hypharos/local_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find racecar_control)/config/hypharos/global_costmap_params.yaml" command="load"/> 
+        <!-- move_base params -->
+        <rosparam file="$(find racecar_control)/config/hypharos/move_base_params.yaml" command="load"/>
+    </node>
+</launch>
