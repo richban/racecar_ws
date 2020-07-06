@@ -17,8 +17,10 @@ global_frame: map
 robot_base_frame: base_link
 
 plugins:
-  - { name: static_layer, type: "costmap_2d::StaticLayer" }
+  # used to initialize the costmap from a static map
+  - { name: static_layer, type: "costmap_2d::StaticLayer" } 
   - { name: obstacle_layer, type: "costmap_2d::VoxelLayer" }
+  # used to inflate obstacles
   - { name: inflation_layer, type: "costmap_2d::InflationLayer" }
 
 # The obstacle layer tracks the obstacles as read by the sensor data.
