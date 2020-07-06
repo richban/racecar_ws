@@ -42,13 +42,13 @@ obstacle_layer:
 # The inflation layer is an optimization that adds new values around lethal obstacles (i.e. inflates the obstacles)
 inflation_layer:
   # exponential rate at which the obstacle cost drops off (default: 10)
-  cost_scaling_factor: 30.0 
+  cost_scaling_factor: 20.0 
   # max. distance from an obstacle at which costs are incurred for planning paths.
-  inflation_radius: 0.4
+  inflation_radius: 0.05
 
 
 # The static map layer represents a largely unchanging portion of the costmap
 static_layer:
   # The topic that the costmap subscribes to for the static map.
-  map_topic: /map
+  map_topic: map
 

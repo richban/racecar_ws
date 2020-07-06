@@ -6,11 +6,8 @@
   <arg name="map_file" default="$(find racecar_control)/maps/apartment.yaml" />
   <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
 
-  <!-- Place map frame at odometry frame -->
-  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 map odom 100"/>
-
   <!-- AMCL Localization -->
-  <arg name="custom_amcl_launch_file" default="$(find racecar_control)/launch/includes/amcl.launch.xml"/>
+  <arg name="custom_amcl_launch_file" default="$(find racecar_control)/launch/includes/amcl_launch.xml"/>
   <include file="$(arg custom_amcl_launch_file)"/>
       
   <!-- Launch the racecar model -->
