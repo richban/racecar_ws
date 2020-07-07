@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <launch>
-  <master auto="start"/>
+    <master auto="start"/>
 
-  <!-- Launch a map from the maps folder-->
-  <arg name="map_file" default="$(find racecar_control)/maps/apartment.yaml" />
-  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
+    <!-- Launch a map from the maps folder-->
+    <arg name="map_file" default="$(find racecar_control)/maps/apartment.yaml" />
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
 
-  <!-- AMCL Localization -->
-  <include file="$(find racecar_control)/launch/includes/hypharos_amcl.launch.xml"/>
-      
-  <!-- Launch the racecar model -->
-  <include file="$(find racecar_control)/launch/racecar_model.launch"/>
-  
-  <!-- Launch rviz -->
-  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/move_base.rviz" />
+    <!-- AMCL Localization -->
+    <include file="$(find racecar_control)/launch/includes/hypharos_amcl.launch.xml"/>
 
-  <!-- Move base -->
+    <!-- Launch the racecar model -->
+    <include file="$(find racecar_control)/launch/racecar_model.launch"/>
+
+    <!-- Launch rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/move_base.rviz" />
+
+    <!-- Move base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base">
         <!-- local planner -->
         <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>  
@@ -23,7 +23,7 @@
         <!-- costmap layers -->    
         <rosparam file="$(find racecar_control)/config/hypharos/local_costmap_params.yaml" command="load"/>
         <rosparam file="$(find racecar_control)/config/hypharos/global_costmap_params.yaml" command="load"/> 
-        <!-- move_base params -->
+            <!-- move_base params -->
         <rosparam file="$(find racecar_control)/config/hypharos/move_base_params.yaml" command="load"/>
     </node>
 </launch>

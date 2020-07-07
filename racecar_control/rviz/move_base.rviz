@@ -189,6 +189,83 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        chassis:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        chassis_inertia:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        laser:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_rear_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_steering_hinge:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_rear_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_steering_hinge:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        zed_camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        zed_camera_right_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -214,25 +291,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 14.4803343
+      Distance: 7.69562674
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.0469000936
-        Y: -5.3074789
-        Z: -5.31854857e-05
+        X: -0.163817242
+        Y: -3.30000329
+        Z: -5.33104831e-05
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 1.56979632
+      Pitch: 1.56479633
       Target Frame: map
       Value: ThirdPersonFollower (rviz)
-      Yaw: 4.71041393
+      Yaw: 4.64541864
     Saved: ~
 Window Geometry:
   Displays:
