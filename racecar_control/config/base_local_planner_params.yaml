@@ -1,6 +1,4 @@
 TebLocalPlannerROS:
-  odom_topic: odom
-  map_frame: /odom
   sim_time: 2.0
 
   # Trajectory

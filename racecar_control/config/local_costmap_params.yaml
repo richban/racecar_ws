@@ -13,7 +13,7 @@ local_costmap:
   # The height of the map in meters.
   height: 4.0
   # The x origin of the map in the global frame in meters.
-  origin_x: -1.5
+  # origin_x: -1.5
   # The y origin of the map in the global frame in meters.
-  origin_y: -1.5
+  # origin_y: -1.5
 

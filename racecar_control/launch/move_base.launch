@@ -17,7 +17,6 @@
   <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/localization.rviz" />
 
   <!-- Move base -->
-  <arg name="base_local_planner" default="teb_local_planner/TebLocalPlannerROS" />
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <!-- planner params -->
     <rosparam file="$(find racecar_control)/config/base_local_planner_params.yaml" command="load" />

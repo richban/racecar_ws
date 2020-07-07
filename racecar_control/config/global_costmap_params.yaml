@@ -6,9 +6,9 @@ global_costmap:
   # If you aren't using an existing map or map server, set the static_map parameter to false.:w
   static_map: true
   robot_radius: 0.3
-  footprint_padding: 0.2
-  width: 102.4
-  height: 102.4
-  origin_x: -51.224
-  origin_y: -51.224
+  footprint_padding: 0.1
+  # width: 102.4
+  # height: 102.4
+  # origin_x: -51.224
+  # origin_y: -51.224
 
