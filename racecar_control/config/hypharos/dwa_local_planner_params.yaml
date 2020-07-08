@@ -7,13 +7,13 @@ DWAPlannerROS:
     # The y acceleration limit of the robot in meters/sec^2
     acc_lim_y: 1.5
     # The maximum x velocity for the robot in m/s
-    max_vel_x: 0.65
+    max_vel_x: 1.5
     min_vel_x: -0.05
     # The maximum y velocity for the robot in m/s
     max_vel_y: 0.1
     min_vel_y: -0.1
     # The absolute value of the maximum translational velocity for the robot in m/s
-    max_trans_vel: 0.65
+    max_trans_vel: 1.5
     min_trans_vel: 0.1
     # The absolute value of the maximum rotational velocity for the robot in rad/s 
     max_rot_vel: 1.0
@@ -21,11 +21,11 @@ DWAPlannerROS:
 
     # FORWARD SIMULATION
     # The amount of time to forward-simulate trajectories in seconds
-    sim_time: 1.7
+    sim_time: 1.5
     # The step size, in meters, to take between points on a given trajectory 
     sim_granularity: 0.025
     # The number of samples to use when exploring the x velocity space 
-    vx_samples: 3
+    vx_samples: 20
     # The number of samples to use when exploring the y velocity space 
     vy_samples: 10
     # The number of samples to use when exploring the theta velocity space 
@@ -33,11 +33,11 @@ DWAPlannerROS:
 
     # TRAJECTORY SCORING PARAMS
     # The weighting for how much the controller should attempt to reach its local goal, also controls speed
-    goal_distance_bias: 1.0
+    goal_distance_bias: 20.0
     # The weighting for how much the controller should stay close to the path it was given 
-    path_distance_bias: 64.0
+    path_distance_bias: 32.0
     # The weighting for how much the controller should attempt to avoid obstacles 
-    occdist_scale: 0.01
+    occdist_scale: 0.02
     # The amount of time that the robot must stop before a collision in order for a trajectory to be considered valid in seconds 
     stop_time_buffer: 0.2
     # The distance from the center point of the robot to place an additional scoring point, in meters  
@@ -55,7 +55,11 @@ DWAPlannerROS:
     # The tolerance in meters for the controller in the x & y distance when achieving a goal 
     xy_goal_tolerance: 0.05
     # The tolerance in radians for the controller in yaw/rotation when achieving its goal 
-    yaw_goal_tolerance: 3.14
+    yaw_goal_tolerance: 0.17
 
     # rot_stopped_vel: 0.01
     # trans_stopped_vel: 0.01
+    
+    # DEBUGGING
+    publish_traj_pc: true
+    publish_cost_grid_pc: true

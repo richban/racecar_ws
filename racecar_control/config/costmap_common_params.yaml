@@ -1,5 +1,6 @@
 # The footprint of the roboot
-footprint: [[-0.305, -0.18], [-0.305, 0.18], [0.305, 0.18], [0.305, -0.18]]
+footprint: [[-0.2, -0.1], [-0.2, 0.1], [0.2, 0.1], [0.2, -0.1]]
+footprint_padding: 0.1
 
 controlller_frequency: 10.0
 controller_patience: 3.0
