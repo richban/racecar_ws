@@ -1,27 +1,27 @@
 DWAPlannerROS:
     # ROBOT CONFIGURATION
     # The rotational acceleration limit of the robot in radians
-    acc_lim_th: 1.2
+    acc_lim_th: 0.2
     # The x acceleration limit of the robot in meters/sec^2 
     acc_lim_x: 1.5
     # The y acceleration limit of the robot in meters/sec^2
-    acc_lim_y: 1.5
+    acc_lim_y: 0.0
     # The maximum x velocity for the robot in m/s
     max_vel_x: 1.5
     min_vel_x: -0.05
     # The maximum y velocity for the robot in m/s
-    max_vel_y: 0.1
-    min_vel_y: -0.1
+    max_vel_y: 0.0
+    min_vel_y: 0.0
     # The absolute value of the maximum translational velocity for the robot in m/s
     max_trans_vel: 1.5
     min_trans_vel: 0.1
     # The absolute value of the maximum rotational velocity for the robot in rad/s 
     max_rot_vel: 1.0
-    min_rot_vel: 0.2
+    min_rot_vel: 0.0
 
     # FORWARD SIMULATION
     # The amount of time to forward-simulate trajectories in seconds
-    sim_time: 1.5
+    sim_time: 3.5
     # The step size, in meters, to take between points on a given trajectory 
     sim_granularity: 0.025
     # The number of samples to use when exploring the x velocity space 
@@ -34,7 +34,7 @@ DWAPlannerROS:
     # TRAJECTORY SCORING PARAMS
     # The weighting for how much the controller should attempt to reach its local goal, also controls speed
     goal_distance_bias: 20.0
-    # The weighting for how much the controller should stay close to the path it was given 
+    # The weighting for how much the controller should stay close to the global path it was given 
     path_distance_bias: 32.0
     # The weighting for how much the controller should attempt to avoid obstacles 
     occdist_scale: 0.02
@@ -57,8 +57,8 @@ DWAPlannerROS:
     # The tolerance in radians for the controller in yaw/rotation when achieving its goal 
     yaw_goal_tolerance: 0.17
 
-    # rot_stopped_vel: 0.01
-    # trans_stopped_vel: 0.01
+    rot_stopped_vel: 0.01
+    trans_stopped_vel: 0.01
     
     # DEBUGGING
     publish_traj_pc: true
