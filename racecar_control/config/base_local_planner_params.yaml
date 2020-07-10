@@ -1,5 +1,5 @@
 TebLocalPlannerROS:
-  sim_time: 2.0
+  sim_time: 3.5
 
   # Trajectory
   teb_autosize: True
@@ -21,9 +21,19 @@ TebLocalPlannerROS:
   wheelbase: 0.325 # Wheelbase of our robot
   cmd_angle_instead_rotvel: False # stage simulator takes the angle instead of the rotvel as input (twist message)
   # ********************************************************************
-  
+  footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
+    type: "line"
+    radius: 0.3 # for type "circular"
+    line_start: [0.0, 0.0] # for type "line"
+    line_end: [0.325, 0.0] # for type "line"
+    front_offset: 0.3 # for type "two_circles"
+    front_radius: 0.3 # for type "two_circles"
+    rear_offset: 0.3 # for type "two_circles"
+    rear_radius: 0.3 # for type "two_circles"
+    vertices: [[-0.2, -0.1], [-0.2, 0.1], [0.2, 0.1], [0.2, -0.1]]
+ 
   # GoalTolerance
-  xy_goal_tolerance: 0.2
+  xy_goal_tolerance: 0.05
   yaw_goal_tolerance: 0.1
   free_goal_vel: False
 

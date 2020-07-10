@@ -19,6 +19,7 @@
   <!-- Move base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <!-- planner params -->
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>  
     <rosparam file="$(find racecar_control)/config/base_local_planner_params.yaml" command="load" />
     <!-- costmap common params -->
     <rosparam file="$(find racecar_control)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
@@ -27,8 +28,6 @@
     <!-- global costmap -->
     <rosparam file="$(find racecar_control)/config/global_costmap_params.yaml" command="load" />
     
-    <param name="move_base/DWAPlannerROS/yaw_goal_tolerance" value="1.0"/>
-    <param name="move_base/DWAPlannerROS/xy_goal_tolerance" value="1.0"/>
   </node>
 
 </launch>
