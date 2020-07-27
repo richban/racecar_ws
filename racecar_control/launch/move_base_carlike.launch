@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<launch>
+    <master auto="start"/>
+
+    <!-- Launch a map from the maps folder-->
+    <arg name="map_file" default="$(find racecar_control)/maps/office_corridor.yaml" />
+
+    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
+
+    <!-- AMCL Localization -->
+    <include file="$(find racecar_control)/launch/includes/carlike_amcl.launch.xml"/>
+
+    <!-- Launch the racecar model -->
+    <include file="$(find racecar_control)/launch/racecar_model.launch"/>
+
+    <!-- Launch rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/move_base.rviz" />
+
+    <!-- Move base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base">
+        <!-- local planner -->
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>  
+        <rosparam file="$(find racecar_control)/config/carlike/teb_local_planner_params.yaml" command="load"/>
+        <!-- costmap layers -->    
+        <rosparam file="$(find racecar_control)/config/carlike/local_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find racecar_control)/config/carlike/global_costmap_params.yaml" command="load"/> 
+        <!-- common params -->
+        <rosparam file="$(find racecar_control)/config/carlike/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+        <rosparam file="$(find racecar_control)/config/carlike/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    </node>
+</launch>
