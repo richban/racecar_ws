@@ -1,6 +1,6 @@
 local_costmap:
-    footprint: [[-0.2, -0.1], [-0.2, 0.1], [0.2, 0.1], [0.2, -0.1]]
-    footprint_padding: 0.1
+    footprint: [ [-0.1,-0.125], [0.5,-0.125], [0.5,0.125], [-0.1,0.125] ]
+    # footprint_padding: 0.1
     transform_tolerance: 1.0
     update_frequency: 10.0
     publish_frequency: 10.0
@@ -9,9 +9,9 @@ local_costmap:
     robot_base_frame: base_link
     static_map: false
     rolling_window: true
-    width: 3.0
-    height: 3.0
-    resolution: 0.02
+    width: 5.0
+    height: 5.0
+    # resolution: 0.02
 
     plugins:            
         - {name: obstacle_layer,    type: "costmap_2d::ObstacleLayer"}
