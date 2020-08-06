@@ -22,6 +22,7 @@ RUN apt-get install -y \
     ros-kinetic-ackermann-msgs \
     ros-kinetic-joy \
     ros-kinetic-map-server \
+    ros-kinetic-navigation \
     build-essential
 
 # Setup workspace
