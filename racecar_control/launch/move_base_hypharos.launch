@@ -3,7 +3,7 @@
     <master auto="start"/>
 
     <!-- Launch a map from the maps folder-->
-    <arg name="map_file" default="$(find racecar_control)/maps/office_corridor.yaml" />
+    <arg name="map_file" default="$(find racecar_control)/maps/office_new.yaml" />
 
     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
 
