@@ -3,7 +3,7 @@
     <master auto="start"/>
 
     <!-- Launch a map from the maps folder-->
-    <arg name="map_file" default="$(find racecar_control)/maps/office_corridor.yaml" />
+    <arg name="map_file" default="$(find racecar_control)/maps/office_new.yaml" />
 
     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
 
@@ -14,13 +14,12 @@
     <include file="$(find racecar_control)/launch/racecar_model.launch"/>
 
     <!-- Launch rviz -->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/move_base.rviz" />
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/move_base_teb.rviz" />
 
     <!-- Move base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base">
         <!-- planner -->
         <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>  
-        <param name="base_gloabal_planner" value ="global_planner/GlobalPlanner"/>
         <rosparam file="$(find racecar_control)/config/carlike/teb_local_planner_params.yaml" command="load"/>
         <!-- costmap layers -->    
         <rosparam file="$(find racecar_control)/config/carlike/local_costmap_params.yaml" command="load"/>
@@ -28,5 +27,10 @@
         <!-- common params -->
         <rosparam file="$(find racecar_control)/config/carlike/move_base_params.yaml" command="load"/>
     </node>
-</launch>
+    
+    <remap from="high_level/ackermann_cmd_mux/input/nav_0" to="/vesc/high_level/ackermann_cmd_mux/input/nav_0"/>
+    <node pkg="racecar_control" type="teb_cmd_to_ackermann_drive.py" name="teb_cmd_to_ackermann_drive" output="screen">
+        <param name="wheel_base" value="0.34"/>
+    </node>
 
+</launch>
