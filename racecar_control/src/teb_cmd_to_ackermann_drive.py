@@ -32,11 +32,11 @@ class TEBPlannerFollower(AckermannPublisher):
         # It does not take into account any minimum speed
         # Integrating this in the optimization scheme would increase the complexity, according to the authors
         # Source: https://github.com/rst-tu-dortmund/teb_local_planner/issues/10#issuecomment-226218740
-        self.minimum_speed = rospy.get_param("~minimum_speed", 0.5)
+        self.minimum_speed = rospy.get_param("~minimum_speed", 0.1)
 
         # Minimum acceptable velocity command
         # commands below this would be considered zero
-        self.velocity_epsilon = rospy.get_param("~velocity_epsilon", 0.2)
+        self.velocity_epsilon = rospy.get_param("~velocity_epsilon", 0.05)
 
         self.velocity = 0.0
         self.steering_angle = 0.0
@@ -48,7 +48,7 @@ class TEBPlannerFollower(AckermannPublisher):
 
     def cmd_callback(self, msg):
         velocity_command = msg.linear.x
-
+        # TO DO: fix if control
         # Should this code go into AckermannPublisher?
         speed = abs(velocity_command)
 

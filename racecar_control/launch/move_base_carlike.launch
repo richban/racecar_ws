@@ -8,7 +8,7 @@
     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" respawn="true" output="screen" />
 
     <!-- AMCL Localization -->
-    <include file="$(find racecar_control)/launch/includes/hypharos_amcl.launch.xml"/>
+    <include file="$(find racecar_control)/launch/includes/amcl.launch.xml"/>
 
     <!-- Launch the racecar model -->
     <include file="$(find racecar_control)/launch/racecar_model.launch"/>
@@ -16,18 +16,41 @@
     <!-- Launch rviz -->
     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find racecar_control)/rviz/move_base_teb.rviz" />
 
-    <!-- Move base -->
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base">
-        <!-- planner -->
-        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>  
-        <rosparam file="$(find racecar_control)/config/carlike/teb_local_planner_params.yaml" command="load"/>
-        <!-- costmap layers -->    
-        <rosparam file="$(find racecar_control)/config/carlike/local_costmap_params.yaml" command="load"/>
-        <rosparam file="$(find racecar_control)/config/carlike/global_costmap_params.yaml" command="load"/> 
-        <!-- common params -->
-        <rosparam file="$(find racecar_control)/config/carlike/move_base_params.yaml" command="load"/>
-    </node>
-    
+    <!-- Front steering: locate base_link at the center of the rear-axle -->
+    <!-- For the cost planner -->
+    <!-- See this https://answers.ros.org/question/237035/steering-axis-of-carlike-robot-with-teb_local_planner/ -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_rear_axle"
+        args="-0.155 0.0 0.0 0.0 0.0 0.0 1.0 /base_link /rear_axle" />
+
+    <!--launch the move_base node-->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find racecar_control)/config/carlike_2/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+        <rosparam file="$(find racecar_control)/config/carlike_2/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+        <rosparam file="$(find racecar_control)/config/carlike_2/local_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find racecar_control)/config/carlike_2/global_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find racecar_control)/config/carlike_2/teb_planner_params.yaml" command="load"/>
+
+        <!--<param name="base_global_planner" value="global_planner/GlobalPlanner" />-->
+
+        <!--  If the frequency is set to 0.0, the global planner will only run when
+        a new goal is received or the  local planner reports that its path is blocked. -->
+		<param name="planner_frequency" value="1.0" />
+		<param name="planner_patience" value="5.0" />
+
+		<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+		<param name="controller_frequency" value="5.0" />
+		<param name="controller_patience" value="15.0" />
+
+        <!-- Our carlike robot is not able to rotate in place -->
+        <param name="clearing_rotation_allowed" value="false" />
+
+        <!-- Documentation says recovery behavious should be turned off for carlike robots -->
+        <!-- http://wiki.ros.org/teb_local_planner/Tutorials/Planning%20for%20car-like%20robots -->
+        <param name="recovery_behavior_enabled" value="false" />
+        <param name="oscillation_timeout" value="30.0" />
+        <param name="oscillation_distance" value="0.2" />
+
+    </node> 
     <remap from="high_level/ackermann_cmd_mux/input/nav_0" to="/vesc/high_level/ackermann_cmd_mux/input/nav_0"/>
     <node pkg="racecar_control" type="teb_cmd_to_ackermann_drive.py" name="teb_cmd_to_ackermann_drive" output="screen">
         <param name="wheel_base" value="0.34"/>
